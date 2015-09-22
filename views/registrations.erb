@@ -3,7 +3,7 @@
 <% @registrations.each do |registration| %>
 	<li>
 		<%= registration.registration_id %>
-		<%= registration.people_id %>
+		<%= select name from people where 'person_id = registration.people_id' %>
 		<%= registration.events_id %>
 		<%= registration.status %>
 	</li>
