@@ -13,8 +13,25 @@
 
 ActiveRecord::Schema.define(version: 20150918195123) do
 
-  create_table "models", force: :cascade do |t|
+  create_table "persons", force: :cascade do |t|
+    t.string "person_id"
     t.string "name"
+    t.string "date-of-birth"
+    t.string "gender"
+    t.string "zipcode"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "event_id"
+    t.string "name"
+    t.string "date"
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.string "name"
+    t.string "person_id"
+    t.string "event_id"
+    t.string "status"
   end
 
 end
