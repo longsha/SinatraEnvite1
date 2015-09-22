@@ -1,0 +1,13 @@
+<h3>These are the Persons!</h3>
+<ol>
+<% @people.each do |person| %>
+	<li>
+		<%= person.person_id %>
+		<%= person.name %>
+		<%= person.gender %>
+		<%= person.dob %>
+		<%= person.zipcode %>
+	</li>
+<% end %>
+</ol>
+<a href="/">Hello go back Main Page!</a>

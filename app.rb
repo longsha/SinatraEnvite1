@@ -1,17 +1,21 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require './config/environments' # database configuration
-require './persons/person'
+require './people/person'
 require './events/event'
 require './registrations/registration'
+
+after do
+  ActiveRecord::Base.clear_active_connections!
+end
 
 get '/' do
 	erb :index
 end
 
-get '/persons' do
-	@persons = Person.all
-	erb :persons
+get '/people' do
+	@people = Person.all
+	erb :people
 end
 
 get '/events' do
@@ -20,14 +24,26 @@ get '/events' do
 end
 
 get '/registrations' do
-	@registration = Registration.all
+	@registrations = Registration.all
 	erb :registrations
+end
+
+get '/person/new' do
+	erb :add_person
+end
+
+get '/event/new' do
+	erb :add_event
+end
+
+get '/registration/new' do
+	erb :add_registration
 end
 
 post '/p_submit' do
 	@person = Person.new(params[:person])
 	if @person.save
-		redirect '/persons'
+		redirect '/people'
 	else
 		"Sorry, there was an error!"
 	end

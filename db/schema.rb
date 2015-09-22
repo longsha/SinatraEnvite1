@@ -11,27 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918195123) do
+ActiveRecord::Schema.define(version: 20150922161326) do
 
-  create_table "persons", force: :cascade do |t|
-    t.string "person_id"
-    t.string "name"
-    t.string "date-of-birth"
-    t.string "gender"
-    t.string "zipcode"
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.string "event_id"
+  create_table "events", primary_key: "event_id", force: :cascade do |t|
     t.string "name"
     t.string "date"
   end
 
-  create_table "registrations", force: :cascade do |t|
+  create_table "people", primary_key: "person_id", force: :cascade do |t|
     t.string "name"
-    t.string "person_id"
-    t.string "event_id"
-    t.string "status"
+    t.string "dob"
+    t.string "gender"
+    t.string "zipcode"
   end
+
+  create_table "registrations", primary_key: "registration_id", force: :cascade do |t|
+    t.integer "people_id"
+    t.integer "events_id"
+    t.string  "status"
+  end
+
+  add_index "registrations", ["events_id"], name: "index_registrations_on_events_id"
+  add_index "registrations", ["people_id"], name: "index_registrations_on_people_id"
 
 end

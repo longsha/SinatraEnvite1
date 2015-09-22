@@ -2,7 +2,9 @@
 <ol>
 <% @events.each do |event| %>
 	<li>
+		<%= event.event_id %>
 		<%= event.name %>
+		<%= event.date %>
 	</li>
 <% end %>
 </ol>
