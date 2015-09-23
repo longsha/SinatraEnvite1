@@ -25,6 +25,8 @@ end
 
 get '/registrations' do
 	@registrations = Registration.all
+  @people = Person.all
+  @events = Event.all
 	erb :registrations
 end
 
@@ -60,9 +62,21 @@ end
 
 post '/r_submit' do
 	@registration = Registration.new(params[:registration])
-	if @registration.save
-		redirect '/registrations'
-	else
-		"Sorry, there was an error!"
-	end
+  if Registration.exists?(:people_id => @registration.people_id, :events_id => @registration.events_id)
+    "This registration already exists!"
+  else
+    if Person.where("person_id=?", @registration.people_id).blank?
+      "Sorry this person_id doesn't exist! Please check again!"
+    else
+      if Event.where("event_id=?", @registration.events_id).blank?
+        "Sorry this event_id doesn't exist! Please check again!"
+      else
+        if @registration.save
+          redirect '/registrations'
+        else
+          "Sorry, there was an error!"
+        end
+      end
+    end
+  end
 end

@@ -2,11 +2,17 @@
 <ol>
 <% @registrations.each do |registration| %>
 	<li>
-		<%= registration.registration_id %>
-		<%= select name from people where 'person_id = registration.people_id' %>
-		<%= registration.events_id %>
-		<%= registration.status %>
-	</li>
+		<label>Registration ID:</label><%= registration.registration_id %><br>
+		<label>Person:</label><%= registration.people_id %>
+		<% @people.where(:person_id => registration.people_id).each do |pe|%>
+			<%= pe.name %>
+		<% end %><br>
+		<label>Event:</label>	<%= registration.events_id %>
+		<% @events.where(:event_id => registration.events_id).each do |ev|%>
+			<%= ev.name %>
+		<% end %><br>
+		<label>Status:</label><%= registration.status %><br>
+	</li><br>
 <% end %>
 </ol>
 <a href="/">Hello go back Main Page!</a>

@@ -2,11 +2,11 @@
 <ol>
 <% @people.each do |person| %>
 	<li>
-		<%= person.person_id %>
-		<%= person.name %>
-		<%= person.gender %>
-		<%= person.dob %>
-		<%= person.zipcode %>
+		<label>Person ID:</label><%= person.person_id %><br>
+		<label>Person Name:</label><%= person.name %><br>
+		<label>Person Gender:</label><%= person.gender %><br>
+		<label>Person DOB:</label><%= person.dob %><br>
+		<label>Person Zipcode:</label><%= person.zipcode %><br>
 	</li>
 <% end %>
 </ol>
